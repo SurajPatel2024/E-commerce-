@@ -134,7 +134,7 @@ export default function Navbar() {
                   <i className="fa-solid fa-user-shield"></i>  Admin Register
                 </button>
                   <button onClick={() => navigate("/ManageUsers")}>
-                  <i className="fa-solid fa-user-shield"></i>  Admin Register
+                  <i className="fa-solid fa-user-shield"></i> Manage Users
                 </button>
                  
                 <button onClick={logoutAdmin}>
