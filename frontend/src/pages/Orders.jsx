@@ -14,12 +14,8 @@ export default function Orders() {
       .catch(() => setLoading(false));
   }, []);
 
-  if (loading) return (
-    <div style={{ textAlign: "center", marginTop: 40 }}>
-      <div className="spinner" style={{ marginBottom: 10 }}></div>
-      <p>Loading orders...</p>
-    </div>
-  );
+ if (loading) return <Loading text="Loading orders..." />;
+
 
   if (orders.length === 0) return <p style={{ textAlign: "center", marginTop: 40 }}>You have no orders yet.</p>;
 
