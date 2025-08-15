@@ -91,7 +91,7 @@ export default function Login() {
         {/* Register Link */}
         <p style={styles.registerText}>
           Don't have an account?{" "}
-          <Link to="/register" style={styles.registerLink}>
+          <Link to="/register">
             Register
           </Link>
         </p>
