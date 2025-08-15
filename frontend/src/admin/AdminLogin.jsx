@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext"; // import context
  
 export default function AdminLogin() {
@@ -78,9 +78,7 @@ export default function AdminLogin() {
           {loading ? <i className="fas fa-spinner fa-spin"></i> : "Login"}
         </button>
       </form>
-         <Link to='/admin/register'>Admin Register</Link>
     </div>
- 
   );
 }
 
