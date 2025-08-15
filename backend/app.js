@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
  const path = require("path");
- 
+
 // ===== CONFIG ===== 
 const app = express();
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -33,10 +33,13 @@ mongoose.connect(DB_URI)
   .catch(err => console.error("❌ Mongo error:", err));
 
 
+// Serve React frontend
 app.use(express.static(path.join(__dirname, "../frontend/build")));
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
 });
+
 
 
 
