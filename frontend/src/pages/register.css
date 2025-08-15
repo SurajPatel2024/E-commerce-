@@ -1,0 +1,116 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+  background: #f9f9f9;
+  padding: 15px;
+}
+
+.register-card {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 420px;
+}
+
+.register-card h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #ff6600;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.input-group input:focus {
+  border-color: #ff6600;
+  outline: none;
+}
+
+.show-password {
+  position: absolute;
+  right: 12px;
+  top: 36px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.show-password:hover {
+  color: #ff6600;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+}
+
+.success-message {
+  color: #27ae60;
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: #ff6600;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.register-btn:hover {
+  background: #e55a00;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.login-link a {
+  color: #ff6600;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .register-card {
+    padding: 1.5rem;
+  }
+  .register-card h2 {
+    font-size: 1.4rem;
+  }
+}

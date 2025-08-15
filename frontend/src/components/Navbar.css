@@ -1,0 +1,171 @@
+/* ===== Base Navbar Styling ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 0.7rem 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.nav-left .logo img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.nav-left .logo img:hover {
+  transform: scale(1.05);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+.nav-btn {
+  background: #007bff;
+  border: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+}
+
+.nav-btn.gradient {
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+}
+
+.nav-btn.gradient-outline {
+  background: transparent;
+  border: 2px solid #007bff;
+  color: #007bff;
+}
+
+.nav-btn.gradient-outline:hover {
+  background: #007bff;
+  color: white;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+}
+
+.dropdown button {
+  background: none;
+  border: none;
+  padding: 0.6rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown button:hover {
+  background: #f5f5f5;
+}
+
+/* Profile menu button */
+.profile-btn {
+  background: none;
+  border: none;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.login-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .nav-right {
+    gap: 0.5rem;
+  }
+  
+  .nav-btn,
+  .nav-link {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.7rem;
+  }
+  
+  .nav-left .logo img {
+    height: 38px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-right {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .nav-link,
+  .nav-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .login-dropdown {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .dropdown {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .dropdown button {
+    justify-content: center;
+  }
+}

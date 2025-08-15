@@ -1,0 +1,90 @@
+/* ===== AUTH PAGE STYLING ===== */
+.auth-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0d6efd;
+  font-size: 28px;
+}
+
+/* Input Fields */
+.auth-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 15px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.auth-container input:focus {
+  border-color: #0d6efd;
+  outline: none;
+  box-shadow: 0 0 5px rgba(13, 110, 253, 0.3);
+}
+
+/* Buttons */
+.auth-container button {
+  width: 100%;
+  padding: 12px;
+  background: #0d6efd;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.auth-container button:hover {
+  background: #0b5ed7;
+}
+
+/* Error Messages */
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Switch to Register/Login Link */
+.auth-container p {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.auth-container p a {
+  color: #0d6efd;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-container p a:hover {
+  text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .auth-container {
+    margin: 30px 15px;
+    padding: 20px;
+  }
+
+  .auth-container h2 {
+    font-size: 24px;
+  }
+}

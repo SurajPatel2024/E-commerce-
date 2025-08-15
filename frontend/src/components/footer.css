@@ -1,0 +1,115 @@
+/* ===== Footer Base ===== */
+.footer {
+  background: white;
+  color: #333;
+  padding: 2rem 1.5rem 1rem;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.08);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+  gap: 2rem;
+}
+
+/* ===== Left Section ===== */
+.footer-left {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.footer-left p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* ===== Right Section ===== */
+.footer-right {
+  flex: 1;
+  min-width: 250px;
+  text-align: right;
+}
+
+.footer-right h3 {
+  margin-bottom: 0.8rem;
+  font-size: 1.4rem;
+  color: #ff5100;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.footer-icons a {
+  color: #0e7005;
+  font-size: 1.4rem;
+  transition: color 0.3s ease;
+}
+
+.footer-icons a:hover {
+  color: #ff5e00; /* Same blue as nav hover */
+}
+
+/* ===== Bottom Section ===== */
+.footer-bottom {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #555;
+  border-top: 1px solid #eee;
+  padding-top: 0.8rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-right {
+    text-align: center;
+  }
+
+  .footer-icons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 1.5rem 1rem;
+  }
+
+  .footer-logo-img {
+    height: 40px;
+  }
+
+  .footer-left p,
+  .footer-bottom p {
+    font-size: 0.8rem;
+  }
+
+  .footer-right h3 {
+    font-size: 1rem;
+  }
+
+  .footer-icons a {
+    font-size: 1rem;
+  }
+}
