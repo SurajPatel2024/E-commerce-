@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./AdminOrders.css";
- 
+import Loading from "../components/Loading";
 export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -71,7 +71,8 @@ export default function AdminOrders() {
     }
   };
 
-  if (loading) return <p className="loading">Loading all orders...</p>;
+if (loading) return <Loading text="Loading orders..." />;
+
   if (error) return <p className="error">{error}</p>;
 
   // Filter orders based on search term (case-insensitive match for name or email)

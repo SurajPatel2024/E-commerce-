@@ -27,7 +27,7 @@ export default function Checkout() {
       });
   };
 
- if (loading) return <Loading text="Loading orders..." />;
+ if (loading) return <Loading text="Processing..." />;
 
 
   const total = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);

@@ -33,7 +33,7 @@ export default function Home() {
       .finally(() => setLoading(false));
   }, []);
 
-     if (loading) return <Loading text="Loading orders..." />;
+     if (loading) return <Loading text="Loading products..." />;
 
 
   const addToCart = async (id) => {

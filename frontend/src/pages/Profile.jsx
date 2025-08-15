@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import API from "../api";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-
+import Loading from "../components/Loading";
 export default function Profile() {
   const { user, setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
@@ -26,7 +26,8 @@ export default function Profile() {
     }
   }, [user, setUser, navigate]);
 
-  if (loading) return <p style={{ textAlign: "center", marginTop: 40 }}>Loading profile...</p>;
+  if (loading) return <Loading text="Loading Profile..." />;
+
   if (error) return <p style={{ color: "red", textAlign: "center", marginTop: 40 }}>{error}</p>;
   if (!user) return <p style={{ textAlign: "center", marginTop: 40 }}>No user data found.</p>;
 
