@@ -36,9 +36,7 @@ mongoose.connect(DB_URI)
 // Serve React frontend
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
-});
+ 
 
 
 
@@ -683,6 +681,10 @@ app.get("/admin/me", adminAuthMiddleware, async (req, res) => {
   } 
 });
  
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
 // ===== START SERVER =====
 app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
  

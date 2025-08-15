@@ -2,11 +2,12 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "app.js",
-  "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "postinstall": "npm rebuild bcrypt --build-from-source"
-  },
+"scripts": {
+  "start": "node app.js",
+  "dev": "nodemon app.js",
+  "postinstall": "npm rebuild bcrypt --build-from-source && cd ../frontend && npm install && npm run build"
+}
+,
   "keywords": [],
   "author": "",
   "license": "ISC",
