@@ -15,7 +15,7 @@ const DB_URI = process.env.DB_URI;
 
 // ===== MIDDLEWARE =====
 app.use(cors({
-  origin: `https://electronic-dukaan.vercel.app`,
+  origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 app.use(express.json()); 

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://electronic-dukaan.onrender.com", // Render backend URL
+   baseURL: import.meta.env.VITE_API_URL, // Render backend URL
   withCredentials: true, // send cookies
 });
 
