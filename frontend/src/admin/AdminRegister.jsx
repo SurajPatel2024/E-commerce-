@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./AdminRegister.css";
+import "./AdminRegister.css"; // make sure this file exists
 
 export default function AdminRegister() {
   const [formData, setFormData] = useState({
@@ -28,28 +28,34 @@ export default function AdminRegister() {
       const res = await fetch("https://electronic-dukaan.onrender.com/admin/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-         credentials: "include",
+        credentials: "include",
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           password: formData.password,
         }),
       });
+
       if (!res.ok) {
         const data = await res.json();
         throw new Error(data.message || "Registration failed");
       }
-      setSuccess("Registration successful! You can now login.");
+
+      setSuccess("✅ Registration successful! You can now login.");
       setFormData({ name: "", email: "", password: "", confirmPassword: "" });
     } catch (err) {
-      setError(err.message);
+      setError("❌ " + err.message);
     }
   };
 
   return (
     <div className="auth-container">
-      <h2>Admin Register</h2>
       <form onSubmit={handleSubmit} className="auth-form">
+        <h2>Admin Register</h2>
+
+        {error && <p className="error-msg">{error}</p>}
+        {success && <p className="success-msg">{success}</p>}
+
         <input
           type="text"
           name="name"
@@ -86,8 +92,6 @@ export default function AdminRegister() {
           minLength={6}
         />
         <button type="submit">Register</button>
-        {error && <p className="error-msg">{error}</p>}
-        {success && <p className="success-msg">{success}</p>}
       </form>
     </div>
   );
