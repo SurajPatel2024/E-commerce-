@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./AdminRegister.css";
 
 export default function AdminRegister() {
   const [formData, setFormData] = useState({
