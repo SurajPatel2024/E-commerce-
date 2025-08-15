@@ -24,6 +24,7 @@ export default function App() {
       <Navbar />
       <main style={{ padding: "20px" }}>
         <Routes>
+          
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -39,6 +40,8 @@ export default function App() {
           <Route path="/admin/login" element={<AdminLogin/>}/>
           <Route path="/admin/register" element={<AdminRegister/>}/>
           <Route path="/admin/dashboard" element={<AdminDashboard/>} />
+
+            <Route path="*" element={<Home />} />
         </Routes>
       
       </main>
