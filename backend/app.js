@@ -682,25 +682,7 @@ app.get("/admin/me", adminAuthMiddleware, async (req, res) => {
 });
 
 
-// Get all users
-// Admin routes in Express.js
-app.get("/admin/users", async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch users" });
-  }
-});
-
-app.delete("/admin/users/:id", async (req, res) => {
-  try {
-    await User.findByIdAndDelete(req.params.id);
-    res.json({ message: "User deleted successfully" });
-  } catch (err) {
-    res.status(500).json({ error: "Failed to delete user" });
-  }
-});
+ 
 
 
  
