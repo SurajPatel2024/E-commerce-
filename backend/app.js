@@ -37,11 +37,7 @@ mongoose.connect(DB_URI)
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
  
-
-
-
-
-
+ 
 // ===== MODELS =====
 const userSchema = new mongoose.Schema({
   name: {
@@ -680,10 +676,6 @@ app.get("/admin/me", adminAuthMiddleware, async (req, res) => {
     res.status(500).json({ error: "Failed to fetch admin details" });
   } 
 });
-
-
- 
-
 
  
 

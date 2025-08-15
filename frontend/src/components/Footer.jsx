@@ -33,7 +33,7 @@ function Footer() {
 
       {/* Bottom Section */}
       <div className="footer-bottom">
-        <p>Designed with ❤️ by Electronic Dukaan Team</p>
+        <p>Designed with ❤️ by Suraj Patel </p>
       </div>
     </footer>
   );
