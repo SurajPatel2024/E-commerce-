@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import Loading from "../components/Loading";
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const [admin, setAdmin] = useState(null);
@@ -31,9 +31,12 @@ export default function AdminDashboard() {
 
   if (!admin)
     return (
-      <p style={{ textAlign: "center", marginTop: "50px" }}>
-        Loading admin info...
-      </p>
+     
+      
+          <Loading text="Loading admin info..." />
+    
+      
+
     );
 
   return (
