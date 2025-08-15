@@ -146,9 +146,9 @@ app.post("/admin/login", async (req, res) => {
     );
 
     res.cookie("authToken", token, {
-      httpOnly: true,
-  secure: true,       // true for HTTPS on hosting
-  sameSite: "None",   // required when frontend and backend are on different domains
+   httpOnly: true,
+  secure: true,       // must be true on HTTPS
+  sameSite: "None",   // allows cross-domain cookies
   maxAge: 86400000,
     });
 

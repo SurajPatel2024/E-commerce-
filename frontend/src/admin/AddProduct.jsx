@@ -35,7 +35,7 @@ export default function AddProduct() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/products", {
+      const response = await fetch("https://electronic-dukaan.onrender.com/products", {
         method: "POST",
          credentials: "include",  
         headers: { "Content-Type": "application/json" },

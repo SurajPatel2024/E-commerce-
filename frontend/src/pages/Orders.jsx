@@ -6,7 +6,7 @@ export default function Orders() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/orders", { withCredentials: true })
+    axios.get("https://electronic-dukaan.onrender.com/orders", { withCredentials: true })
       .then(res => {
         setOrders(res.data);
         setLoading(false);

@@ -8,7 +8,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
-        const res = await fetch("http://localhost:3000/admin/me", {
+        const res = await fetch("https://electronic-dukaan.onrender.com/admin/me", {
           credentials: "include",
         });
         if (!res.ok) throw new Error("Not authorized");
@@ -22,7 +22,7 @@ export default function AdminDashboard() {
   }, [navigate]);
 
   const handleLogout = async () => {
-    await fetch("http://localhost:3000/admin/logout", {
+    await fetch("https://electronic-dukaan.onrender.com/admin/logout", {
       method: "POST",
       credentials: "include",
     });

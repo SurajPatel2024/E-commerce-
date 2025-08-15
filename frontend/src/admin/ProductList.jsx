@@ -15,7 +15,7 @@ export default function ProductList() {
   
   const fetchProducts = async () => {
     try {
-      const res = await fetch("http://localhost:3000/products");
+      const res = await fetch("https://electronic-dukaan.onrender.com/products");
       if (res.ok) {
         const data = await res.json();
         setProducts(data);
@@ -43,7 +43,7 @@ export default function ProductList() {
   const handleDelete = async (id) => {
    
     try {
-      const res = await fetch(`http://localhost:3000/products/${id}`, {
+      const res = await fetch(`https://electronic-dukaan.onrender.com/products/${id}`, {
         method: "DELETE",
          credentials: "include",
       });
@@ -86,7 +86,7 @@ export default function ProductList() {
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/products/${editingId}`, {
+      const res = await fetch(`https://electronic-dukaan.onrender.com/products/${editingId}`, {
         method: "PUT",
          credentials: "include",
         headers: { "Content-Type": "application/json" },

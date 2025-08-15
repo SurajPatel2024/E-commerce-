@@ -17,7 +17,7 @@ export default function AdminLogin() {
     setError("");
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/admin/login", {
+      const res = await fetch("https://electronic-dukaan.onrender.com/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -28,7 +28,7 @@ export default function AdminLogin() {
       if (!res.ok) throw new Error(data.error || "Incorrect email or password");
 
       // fetch admin details immediately after login
-      const meRes = await fetch("http://localhost:3000/admin/me", {
+      const meRes = await fetch("https://electronic-dukaan.onrender.com/admin/me", {
         credentials: "include",
       });
       const meData = await meRes.json();

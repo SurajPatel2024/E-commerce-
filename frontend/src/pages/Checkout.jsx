@@ -7,7 +7,7 @@ export default function Checkout() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3000/cart", { withCredentials: true })
+    axios.get("https://electronic-dukaan.onrender.com/cart", { withCredentials: true })
       .then(res => {
         setCart(res.data);
         setLoading(false);
@@ -16,7 +16,7 @@ export default function Checkout() {
   }, []);
 
   const handleCheckout = () => {
-    axios.post("http://localhost:3000/checkout", {}, { withCredentials: true })
+    axios.post("https://electronic-dukaan.onrender.com/checkout", {}, { withCredentials: true })
       .then(res => {
         setMessage(res.data.message);
         setCart([]);

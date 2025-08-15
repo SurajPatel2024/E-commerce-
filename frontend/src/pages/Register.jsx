@@ -38,7 +38,7 @@ export default function Register() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/register", {
+      const res = await fetch("https://electronic-dukaan.onrender.com/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

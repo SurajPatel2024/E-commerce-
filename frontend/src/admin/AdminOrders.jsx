@@ -21,7 +21,7 @@ export default function AdminOrders() {
 
   const fetchAllOrders = async () => {
     try {
-      const res = await fetch("http://localhost:3000/admin/orders", {
+      const res = await fetch("https://electronic-dukaan.onrender.com/admin/orders", {
         credentials: "include",
       });
       if (!res.ok) throw new Error("Failed to fetch all orders");
@@ -37,7 +37,7 @@ export default function AdminOrders() {
 
   const updateStatus = async (orderId, newStatus) => {
     try {
-      const res = await fetch(`http://localhost:3000/admin/orders/${orderId}`, {
+      const res = await fetch(`https://electronic-dukaan.onrender.com/admin/orders/${orderId}`, {
         method: "PATCH",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -59,7 +59,7 @@ export default function AdminOrders() {
       showPopup("Remove Order successfully!", "success"); 
 
     try {
-      const res = await fetch(`http://localhost:3000/admin/orders/${orderId}`, {
+      const res = await fetch(`https://electronic-dukaan.onrender.com/admin/orders/${orderId}`, {
         method: "DELETE",
         credentials: "include",
       });
