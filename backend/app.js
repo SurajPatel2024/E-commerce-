@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
- 
+
 // ===== CONFIG ===== 
 const app = express();
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -60,7 +60,7 @@ const productSchema = new mongoose.Schema({
   description: String
 });
 const Product = mongoose.model("Product", productSchema);
- 
+
 const orderSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   items: [
@@ -71,19 +71,21 @@ const orderSchema = new mongoose.Schema({
     },
   ],
   totalAmount: { type: Number, required: true },
-   paymentMethod: { type: String, enum: ["Cash", "Online"], required: true },
+  paymentMethod: { type: String, enum: ["Cash", "Online"], required: true },
   createdAt: { type: Date, default: Date.now },
   status: {
     type: String,
     enum: ["Pending", "Processing", "Shipped", "Delivered", "Cancelled"],
     default: "Pending",
   },
-  address: {  street: { type: String },
+  address: {
+    street: { type: String },
     pincode: { type: String },
     landmark: { type: String },
     city: { type: String },
-    state: { type: String } },
-   
+    state: { type: String }
+  },
+
 });
 
 const Order = mongoose.model("Order", orderSchema);
@@ -146,18 +148,18 @@ app.post("/admin/login", async (req, res) => {
     );
 
     res.cookie("authToken", token, {
-      httpOnly: true,
-      secure: false, // true in production with HTTPS
-      sameSite: "Lax",
-      maxAge: 86400000,
+      httpOnly: true,       // prevents JS access
+      secure: true,         // set true in production (HTTPS)
+      sameSite: "None",     // required for cross-origin cookies
+      maxAge: 86400000,     // 1 day
     });
 
     res.json({ message: "Admin login successful" });
   } catch (err) {
     console.error("Admin login error:", err);
     res.status(500).json({ error: "Login failed" });
-  }  
-}); 
+  }
+});
 
 app.post("/admin/register", async (req, res) => {
   const { name, email, password } = req.body;
@@ -176,11 +178,12 @@ app.post("/admin/register", async (req, res) => {
   }
 });
 
-app.post("/admin/logout" , (req, res) => {
+app.post("/admin/logout", (req, res) => {
   res.clearCookie("authToken", {
-    httpOnly: true,
-    sameSite: "Lax",
-    secure: false
+    httpOnly: true,       // prevents JS access
+    secure: true,         // set true in production (HTTPS)
+    sameSite: "None",     // required for cross-origin cookies
+    maxAge: 86400000,     // 1 day
   });
   res.json({ message: "Logged out successfully" });
 });
@@ -233,10 +236,10 @@ app.post("/login", async (req, res) => {
       { expiresIn: "1h" }
     );
     res.cookie("authToken", token, {
-      httpOnly: true,
-      secure: false, // set true in production with https
-      sameSite: "Lax",
-      maxAge: 3600000
+      httpOnly: true,       // prevents JS access
+      secure: true,         // set true in production (HTTPS)
+      sameSite: "None",     // required for cross-origin cookies
+      maxAge: 86400000,     // 1 day
     });
     res.json({
       message: "Login successful",
@@ -248,11 +251,12 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/logout",  (req, res) => {
+app.post("/logout", (req, res) => {
   res.clearCookie("authToken", {
-    httpOnly: true,
-    sameSite: "Lax",
-    secure: false
+    httpOnly: true,       // prevents JS access
+    secure: true,         // set true in production (HTTPS)
+    sameSite: "None",     // required for cross-origin cookies
+    maxAge: 86400000,     // 1 day
   });
   res.json({ message: "Logged out successfully" });
 });
@@ -299,7 +303,7 @@ app.put("/profile", authMiddleware, async (req, res) => {
 });
 
 // ===== PRODUCT ROUTES =====
-app.get("/products",  async (req, res) => {
+app.get("/products", async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
@@ -309,7 +313,7 @@ app.get("/products",  async (req, res) => {
   }
 });
 
-app.post("/products",adminAuthMiddleware, async (req, res) => {
+app.post("/products", adminAuthMiddleware, async (req, res) => {
   try {
     const { name, price, image, description } = req.body;
     if (!name || price == null || !image) {
@@ -324,7 +328,7 @@ app.post("/products",adminAuthMiddleware, async (req, res) => {
   }
 });
 
-app.delete("/products/:id",adminAuthMiddleware, async (req, res) => {
+app.delete("/products/:id", adminAuthMiddleware, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.json({ message: "Product deleted" });
@@ -334,7 +338,7 @@ app.delete("/products/:id",adminAuthMiddleware, async (req, res) => {
   }
 });
 
-app.put("/products/:id",adminAuthMiddleware, async (req, res) => {
+app.put("/products/:id", adminAuthMiddleware, async (req, res) => {
   try {
     const { name, price, image, description } = req.body;
     const updatedProduct = await Product.findByIdAndUpdate(
@@ -390,7 +394,7 @@ app.post("/cart", authMiddleware, async (req, res) => {
     res.status(500).json({ error: "Failed to add to cart" });
   }
 });
-  
+
 // POST /cart/:productId  -> increment by 1 (convenience route)
 app.post("/cart/:productId", authMiddleware, async (req, res) => {
   const { productId } = req.params;
@@ -525,7 +529,7 @@ app.delete("/cart/:productId", authMiddleware, async (req, res) => {
   }
 });
 
- 
+
 
 // POST /checkout -> create an order from all cart items
 app.post("/checkout", authMiddleware, async (req, res) => {
@@ -584,14 +588,14 @@ app.get("/orders", authMiddleware, async (req, res) => {
 });
 
 // Example in Express.js
-app.get("/admin/orders",adminAuthMiddleware, async (req, res) => {
+app.get("/admin/orders", adminAuthMiddleware, async (req, res) => {
   try {
     //  if (!req.user || !req.user.isAdmin) return res.status(403).json({ error: "Not authorized" });
-        
+
     const orders = await Order.find()
-        .populate("user", "name email phone ") // populate user name & email
-      
-        
+      .populate("user", "name email phone ") // populate user name & email
+
+
       .populate("items.product", "name price image") // populate product details
       .sort({ createdAt: -1 }); // newest first
 
@@ -602,7 +606,7 @@ app.get("/admin/orders",adminAuthMiddleware, async (req, res) => {
   }
 });
 // PATCH /admin/orders/:orderId
-app.patch("/admin/orders/:orderId",adminAuthMiddleware, async (req, res) => {
+app.patch("/admin/orders/:orderId", adminAuthMiddleware, async (req, res) => {
   try {
     const { orderId } = req.params;
     const { status } = req.body;
@@ -640,7 +644,7 @@ app.patch("/admin/orders/:orderId",adminAuthMiddleware, async (req, res) => {
   }
 });
 
- app.delete("/admin/orders/:orderId",adminAuthMiddleware, async (req, res) => {
+app.delete("/admin/orders/:orderId", adminAuthMiddleware, async (req, res) => {
   try {
     const { orderId } = req.params;
     const deletedOrder = await Order.findByIdAndDelete(orderId);
@@ -662,9 +666,8 @@ app.get("/admin/me", adminAuthMiddleware, async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch admin details" });
-  } 
+  }
 });
- 
+
 // ===== START SERVER =====
 app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
- 
