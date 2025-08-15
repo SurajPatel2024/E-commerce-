@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import API from "../api";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 import "./home.css";
 
 export default function Home() {
@@ -31,6 +32,9 @@ export default function Home() {
       })
       .finally(() => setLoading(false));
   }, []);
+
+     if (loading) return <Loading text="Loading orders..." />;
+
 
   const addToCart = async (id) => {
     if (!user) {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 export default function Checkout() {
   const [cart, setCart] = useState([]);
@@ -26,7 +27,8 @@ export default function Checkout() {
       });
   };
 
-  if (loading) return <p>Loading cart...</p>;
+ if (loading) return <Loading text="Loading orders..." />;
+
 
   const total = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
 

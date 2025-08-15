@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Cart.css";
-
+import Loading from "../components/Loading";
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -75,7 +75,8 @@ export default function Cart() {
     }
   };
 
-  if (loading) return <p>Loading cart...</p>;
+ if (loading) return <Loading text="Loading orders..." />;
+
 
   const totalPrice = cart.reduce(
     (sum, item) => sum + (item.product?.price || item.price || 0) * (item.quantity || 1),
