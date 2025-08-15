@@ -12,12 +12,13 @@ export default function ProductList() {
   });
   const [message, setMessage] = useState("");
    
-  if (loading) return <Loading text="Loading Products..." />;
+
 
   const fetchProducts = async () => {
     try {
       const res = await fetch("https://electronic-dukaan.onrender.com/products");
       if (res.ok) {
+        if (loading) return <Loading text="Loading Products..." />;
         const data = await res.json();
         setProducts(data);
       } else {
