@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./register.css"; // New CSS file for styles
+import API from "../api"; // Axios instance with baseURL and withCredentials:true
+import "./register.css";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -38,22 +39,11 @@ export default function Register() {
     }
 
     try {
-      const res = await fetch("https://electronic-dukaan.onrender.com/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-        credentials: "include",
-      });
-
-      const data = await res.json();
-      if (res.ok) {
-        setMessage("✅ Registration successful!");
-        setForm({ name: "", email: "", password: "" });
-      } else {
-        setError(data.error || "❌ Registration failed");
-      }
+      const res = await API.post("/register", form); // ✅ using API instance
+      setMessage("✅ Registration successful!");
+      setForm({ name: "", email: "", password: "" });
     } catch (err) {
-      setError("⚠️ Server error");
+      setError(err.response?.data?.error || "❌ Registration failed");
     }
   };
 
@@ -112,7 +102,7 @@ export default function Register() {
         </button>
 
         <p className="login-link">
-          Already have an account? <a href="/login">Login</a>
+          Already have an account? <Link to="/login">Login</Link>
         </p>
       </form>
     </div>
