@@ -147,9 +147,9 @@ app.post("/admin/login", async (req, res) => {
 
     res.cookie("authToken", token, {
       httpOnly: true,
-      secure: false, // true in production with HTTPS
-      sameSite: "Lax",
-      maxAge: 86400000,
+  secure: true,       // true for HTTPS on hosting
+  sameSite: "None",   // required when frontend and backend are on different domains
+  maxAge: 86400000,
     });
 
     res.json({ message: "Admin login successful" });
@@ -179,8 +179,8 @@ app.post("/admin/register", async (req, res) => {
 app.post("/admin/logout" , (req, res) => {
   res.clearCookie("authToken", {
     httpOnly: true,
-    sameSite: "Lax",
-    secure: false
+    sameSite: "None",
+    secure: true
   });
   res.json({ message: "Logged out successfully" });
 });
@@ -234,9 +234,9 @@ app.post("/login", async (req, res) => {
     );
     res.cookie("authToken", token, {
       httpOnly: true,
-      secure: false, // set true in production with https
-      sameSite: "Lax",
-      maxAge: 3600000
+      secure: true, // set true in production with https
+      sameSite: "None",
+       maxAge: 86400000
     });
     res.json({
       message: "Login successful",
@@ -251,8 +251,8 @@ app.post("/login", async (req, res) => {
 app.post("/logout",  (req, res) => {
   res.clearCookie("authToken", {
     httpOnly: true,
-    sameSite: "Lax",
-    secure: false
+    sameSite: "None",
+    secure: true
   });
   res.json({ message: "Logged out successfully" });
 });
