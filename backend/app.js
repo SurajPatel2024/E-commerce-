@@ -15,14 +15,14 @@ const DB_URI = process.env.DB_URI;
 
 // ===== MIDDLEWARE =====
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: `https://electronic-dukaan.vercel.app`,
   credentials: true
 }));
-app.use(express.json());
+app.use(express.json()); 
 app.use(cookieParser());
-
+  
 // ===== DB CONNECTION =====
-mongoose.connect(DB_URI)
+mongoose.connect(DB_URI) 
   .then(() => console.log("✅ MongoDB connected"))
   .catch(err => console.error("❌ Mongo error:", err));
 

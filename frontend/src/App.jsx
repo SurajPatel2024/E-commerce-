@@ -19,7 +19,7 @@ import AdminDashboard from "./admin/AdminDashboard";
  
  
 export default function App() {
-  return (
+  return ( 
     <Router>
       <Navbar />
       <main style={{ padding: "20px" }}>
