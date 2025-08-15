@@ -109,7 +109,7 @@ export default function Register() {
 
         <p className="login-link">
           Already have an account?  
-           <Link to="/login" style={styles.registerLink}>
+           <Link to="/login">
             Login
           </Link>
         
