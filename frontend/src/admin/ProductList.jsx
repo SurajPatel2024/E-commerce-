@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useEffect as useEff } from "react";
- 
+import Loading from "../components/Loading";
 export default function ProductList() {
- 
+ const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [editProduct, setEditProduct] = useState({
@@ -12,7 +12,8 @@ export default function ProductList() {
   });
   const [message, setMessage] = useState("");
    
-  
+  if (loading) return <Loading text="Loading Products..." />;
+
   const fetchProducts = async () => {
     try {
       const res = await fetch("https://electronic-dukaan.onrender.com/products");
