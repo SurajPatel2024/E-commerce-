@@ -680,6 +680,28 @@ app.get("/admin/me", adminAuthMiddleware, async (req, res) => {
     res.status(500).json({ error: "Failed to fetch admin details" });
   } 
 });
+
+
+// Get all users
+app.get("/admin/users", adminAuthMiddleware, async (req, res) => {
+  try {
+    const users = await User.find().select("-password");
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch users" });
+  }
+});
+
+// Delete user
+app.delete("/admin/users/:id", adminAuthMiddleware, async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.json({ message: "User deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete user" });
+  }
+});
+
  
 
 app.get("*", (req, res) => {
