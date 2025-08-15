@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import API from "../api"; // Axios instance
 import "./register.css";
-
+import { useNavigate, Link } from "react-router-dom";
 export default function Register() {
   const [form, setForm] = useState({
     name: "",
@@ -11,6 +11,7 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+    const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -107,7 +108,11 @@ export default function Register() {
         </button>
 
         <p className="login-link">
-          Already have an account? <a href="/login">Login</a>
+          Already have an account?  
+           <Link to="/login" style={styles.registerLink}>
+            Login
+          </Link>
+        
         </p>
       </form>
     </div>

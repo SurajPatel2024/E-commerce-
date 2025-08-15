@@ -1,4 +1,6 @@
 require("dotenv").config();
+
+
 // ===== IMPORTS =====
 const express = require("express");
 const mongoose = require("mongoose");
@@ -6,12 +8,15 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+ const path = require("path");
  
 // ===== CONFIG ===== 
 const app = express();
 const SECRET_KEY = process.env.SECRET_KEY;
 const PORT = process.env.PORT || 3000;
 const DB_URI = process.env.DB_URI;
+
+
 
 // ===== MIDDLEWARE =====
 app.use(cors({
@@ -20,11 +25,21 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser());
+ 
 
 // ===== DB CONNECTION =====
 mongoose.connect(DB_URI)
   .then(() => console.log("✅ MongoDB connected"))
   .catch(err => console.error("❌ Mongo error:", err));
+
+
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+});
+
+
+
 
 // ===== MODELS =====
 const userSchema = new mongoose.Schema({

@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "app.js",
-"scripts": {
-  "start": "node app.js",
-  "dev": "nodemon app.js",
-  "postinstall": "npm rebuild bcrypt --build-from-source"
-},
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "postinstall": "npm rebuild bcrypt --build-from-source"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.1",
     "node-fetch": "^3.3.2",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "path": "^0.12.7"
   }
 }
