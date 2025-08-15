@@ -2,7 +2,7 @@ require("dotenv").config();
 // ===== IMPORTS =====
 const express = require("express");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");

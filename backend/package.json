@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-  "start": "node app.js",
-  "postinstall": "npm rebuild bcrypt --build-from-source"
-},
+    "start": "node app.js",
+    "postinstall": "npm rebuild bcrypt --build-from-source"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
