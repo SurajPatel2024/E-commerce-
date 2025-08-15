@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import API from "../api"; // Axios instance with baseURL + withCredentials:true
 import { Link } from "react-router-dom";
-import API from "../api";
 import "./register.css";
 
 export default function Register() {
@@ -12,22 +12,24 @@ export default function Register() {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
   const togglePassword = () => setShowPassword(!showPassword);
 
-  const validatePassword = (password) =>
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+    return regex.test(password);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(""); 
     setMessage("");
-    setError("");
 
     if (!validatePassword(form.password)) {
-      setError("Password must be at least 8 characters, include uppercase, lowercase, number & special char.");
+      setError("Password must be 8+ chars, include uppercase, lowercase, number, and special char.");
       return;
     }
 
     try {
-      const res = await API.post("/register", form); // API instance
-      setMessage("✅ Registration successful!");
+      const res = await API.post("/register", form); // Axios with baseURL
+      setMessage("✅ Registration successful! You can now login.");
       setForm({ name: "", email: "", password: "" });
     } catch (err) {
       setError(err.response?.data?.error || "❌ Registration failed");
@@ -38,6 +40,7 @@ export default function Register() {
     <div className="register-container">
       <form className="register-card" onSubmit={handleSubmit}>
         <h2><i className="fas fa-user-plus"></i> Register</h2>
+
         {message && <p className="success-message">{message}</p>}
         {error && <p className="error-message">{error}</p>}
 
