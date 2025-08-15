@@ -1,0 +1,85 @@
+/* AdminRegister.css */
+
+.auth-container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 30px 25px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+.auth-container h2 {
+  margin-bottom: 25px;
+  color: #007bff;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-form input {
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.auth-form input:focus {
+  border-color: #007bff;
+}
+
+.auth-form button {
+  padding: 12px 0;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-form button:hover {
+  background-color: #0056b3;
+}
+
+.error-msg {
+  color: #f44336;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.success-msg {
+  color: #4caf50;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+@media (max-width: 480px) {
+  .auth-container {
+    margin: 40px 20px;
+    padding: 25px 20px;
+  }
+
+  .auth-container h2 {
+    font-size: 24px;
+  }
+
+  .auth-form input {
+    font-size: 15px;
+  }
+
+  .auth-form button {
+    font-size: 15px;
+  }
+}
