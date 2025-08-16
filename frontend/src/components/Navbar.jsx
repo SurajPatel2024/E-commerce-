@@ -200,10 +200,11 @@ export default function Navbar() {
         {admin && (
           <>
 
-                   <div class="profile">
+                <div class="profile">
   <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" class="profile-icon" />
   <span class="username">{admin.name}</span>
        </div>
+       
             <Link to="/admin/dashboard" onClick={() => setMobileMenu(false)}>
               <i className="fas fa-tachometer-alt"></i> Admin Dashboard
             </Link>

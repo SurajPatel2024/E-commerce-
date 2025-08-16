@@ -1,19 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Cart.css";
-import Loading from "../components/Loading";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import API from "../api";   // ✅ Add this
+
+
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState(""); // New state
-
+  const [paymentMethod, setPaymentMethod] = useState(""); 
+  const { user, setUser } = useContext(AuthContext);  
+  const navigate = useNavigate();
   useEffect(() => {
     fetchCart();
+    fetchUser();
   }, []);
 
   const fetchCart = async () => {
     try {
-      const res = await fetch("https://electronic-dukaan.onrender.com/cart", {
+      const res = await fetch("http://localhost:3000/cart", {
         credentials: "include",
       });
       if (!res.ok) throw new Error("Failed to fetch cart");
@@ -27,8 +33,17 @@ export default function Cart() {
     }
   };
 
+  const fetchUser = async () => {
+    try {
+      const res = await API.get("/me");
+      setUser(res.data);
+    } catch (err) {
+      console.error("Failed to fetch user:", err);
+    }
+  };
+
   const increaseQuantity = async (productId) => {
-    await fetch(`https://electronic-dukaan.onrender.com/cart/${productId}/increase`, {
+    await fetch(`http://localhost:3000/cart/${productId}/increase`, {
       method: "POST",
       credentials: "include",
     });
@@ -36,7 +51,7 @@ export default function Cart() {
   };
 
   const decreaseQuantity = async (productId) => {
-    await fetch(`https://electronic-dukaan.onrender.com/cart/${productId}/decrease`, {
+    await fetch(`http://localhost:3000/cart/${productId}/decrease`, {
       method: "POST",
       credentials: "include",
     });
@@ -44,7 +59,7 @@ export default function Cart() {
   };
 
   const removeItem = async (productId) => {
-    await fetch(`https://electronic-dukaan.onrender.com/cart/${productId}`, {
+    await fetch(`http://localhost:3000/cart/${productId}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -56,14 +71,24 @@ export default function Cart() {
       setMessage("Please select a payment method first.");
       return;
     }
+ 
+    // ✅ Address check
+    const address = user?.address || {};
+    if (!address.street || !address.pincode || !address.city || !address.state) {
+      setMessage("⚠️Please complete your 📍Address before checkout.");
+      setTimeout(() => navigate("/edit-profile"), 3000); // Redirect after 2s
+      return;
+    }
 
     try {
-      const res = await fetch("https://electronic-dukaan.onrender.com/checkout", {
+      const res = await fetch("http://localhost:3000/checkout", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ paymentMethod }),
       });
+
+        
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Checkout failed");
       setMessage(data.message || "Order placed successfully!");
@@ -75,8 +100,7 @@ export default function Cart() {
     }
   };
 
- if (loading) return <Loading text="Loading carts..." />;
-
+  if (loading) return <p>Loading cart...</p>;
 
   const totalPrice = cart.reduce(
     (sum, item) => sum + (item.product?.price || item.price || 0) * (item.quantity || 1),
@@ -189,7 +213,13 @@ export default function Cart() {
         </>
       )}
 
-      {message && <p className="checkout-message">{message}</p>}
+ 
+      {message && (
+  <p style={{ color: "green", marginTop: "10px", fontWeight: "bold" }}>
+    {message}
+  </p>
+)}
+
     </div>
   );
 }

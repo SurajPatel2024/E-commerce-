@@ -155,7 +155,7 @@ export default function EditProfile() {
           <h3 style={styles.sectionTitle}>Personal Information</h3>
           <InputField label="Full Name" value={form.name} onChange={val => setForm({...form, name: val})} error={errors.name} />
           <InputField label="Email" type="email" value={form.email} onChange={val => setForm({...form, email: val})} error={errors.email} />
-          <InputField label="Phone Number" value={form.phone} onChange={val => setForm({...form, phone: val})} error={errors.phone} placeholder="Optional"/>
+          <InputField label="Phone Number" value={form.phone} onChange={val => setForm({...form, phone: val})} error={errors.phone} placeholder="Phone"/>
         </section>
 
         {/* Address Section */}
