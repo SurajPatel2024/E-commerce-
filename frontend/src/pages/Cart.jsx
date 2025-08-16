@@ -19,7 +19,7 @@ export default function Cart() {
 
   const fetchCart = async () => {
     try {
-      const res = await fetch("http://localhost:3000/cart", {
+      const res = await fetch("https://electronic-dukaan.onrender.com/cart", {
         credentials: "include",
       });
       if (!res.ok) throw new Error("Failed to fetch cart");
@@ -43,7 +43,7 @@ export default function Cart() {
   };
 
   const increaseQuantity = async (productId) => {
-    await fetch(`http://localhost:3000/cart/${productId}/increase`, {
+    await fetch(`https://electronic-dukaan.onrender.com/cart/${productId}/increase`, {
       method: "POST",
       credentials: "include",
     });
@@ -51,7 +51,7 @@ export default function Cart() {
   };
 
   const decreaseQuantity = async (productId) => {
-    await fetch(`http://localhost:3000/cart/${productId}/decrease`, {
+    await fetch(`https://electronic-dukaan.onrender.com/cart/${productId}/decrease`, {
       method: "POST",
       credentials: "include",
     });
@@ -59,7 +59,7 @@ export default function Cart() {
   };
 
   const removeItem = async (productId) => {
-    await fetch(`http://localhost:3000/cart/${productId}`, {
+    await fetch(`https://electronic-dukaan.onrender.com/cart/${productId}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -81,7 +81,7 @@ export default function Cart() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/checkout", {
+      const res = await fetch("https://electronic-dukaan.onrender.com/checkout", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
