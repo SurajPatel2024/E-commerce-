@@ -3,7 +3,7 @@ import "./Cart.css";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import API from "../api";   // ✅ Add this
-
+import Loading from "../components/Loading";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
@@ -100,7 +100,9 @@ export default function Cart() {
     }
   };
 
-  if (loading) return <p>Loading cart...</p>;
+  
+   if (loading) return <Loading text="Loading cart..." />;
+  
 
   const totalPrice = cart.reduce(
     (sum, item) => sum + (item.product?.price || item.price || 0) * (item.quantity || 1),
