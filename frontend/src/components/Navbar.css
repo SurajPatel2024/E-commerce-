@@ -169,3 +169,129 @@
     justify-content: center;
   }
 }
+/* Hide desktop menu on mobile */
+@media (max-width: 768px) {
+  .desktop-menu {
+    display: none;
+  }
+  .menu-btn {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #333333;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 1100;
+  }
+
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 250px;
+    height: 100%;
+    background:  #f7741d ;
+    color: #fff;
+    padding-top: 60px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .mobile-nav.active {
+    left: 0;
+  }
+
+  .mobile-nav a,
+  .mobile-nav button {
+    display: block;
+    padding: 15px 20px;
+    color: #ffffff;
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 600;
+     
+  }
+
+  .mobile-nav a:hover,
+  .mobile-nav button:hover {
+    background: #ff4e07;  
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: background 0.3s ease;
+        cursor: pointer;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 1px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+/* Desktop - hide mobile menu */
+@media (min-width: 769px) {
+  .menu-btn,
+  .mobile-nav {
+    display: none;
+  }
+}
+
+ 
+/* Profile Section */
+.profile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+ 
+
+ 
+
+/* Username */
+.username {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+ 
+
+/* Mobile friendly */
+@media (max-width: 768px) {
+  .profile {
+    padding: 10px 14px;
+    margin: 10px 6px;
+   
+  }
+
+  .profile-icon {
+    width: 80px;
+    height: 80px;
+     border: 4px solid rgb(255, 255, 255) ;
+   border-radius: 100%;
+  }
+
+  .username {
+    font-size: 15px;
+  }
+  .username::first-letter {
+      font-size: 20px;
+  }
+}
