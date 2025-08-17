@@ -26,7 +26,7 @@ function Footer() {
           <div className="footer-icons">
             <a href="https://github.com/SurajPatel2024" aria-label="Github"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/suraj-patel-webdev?original_referer=https%3A%2F%2Fchatgpt.com%2F" aria-label="Linkdin"><i class="fab fa-linkedin" ></i></a>
-            <a href="#" aria-label="WhatsAppIcon"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://whatsapp.com/channel/0029Vb6lcf00rGiO0xkjye3P" aria-label="WhatsAppIcon"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
       </div>

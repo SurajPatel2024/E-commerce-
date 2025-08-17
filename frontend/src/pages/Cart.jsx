@@ -4,7 +4,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import API from "../api";    
-
+import Loading from "../components/Loading";
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -111,6 +111,7 @@ export default function Cart() {
   };
 
   if (loading) return <p>Loading cart...</p>;
+   if (loading) return <Loading text="Loading cart..." />;
 
   const totalPrice = cart.reduce(
     (sum, item) =>
