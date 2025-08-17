@@ -1,20 +1,22 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Cart.css";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import API from "../api";   // ✅ Add this
-
+import API from "../api";    
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState(""); 
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [paid, setPaid] = useState(false); 
+  const [addressChecked, setAddressChecked] = useState(false);
   const { user, setUser } = useContext(AuthContext);  
   const navigate = useNavigate();
+
   useEffect(() => {
     fetchCart();
-    fetchUser();
   }, []);
 
   const fetchCart = async () => {
@@ -30,15 +32,6 @@ export default function Cart() {
       setCart([]);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const fetchUser = async () => {
-    try {
-      const res = await API.get("/me");
-      setUser(res.data);
-    } catch (err) {
-      console.error("Failed to fetch user:", err);
     }
   };
 
@@ -66,34 +59,51 @@ export default function Cart() {
     fetchCart();
   };
 
-  const handleCheckout = async () => {
+  // ✅ New: Check Address function
+  const handleCheckAddress = () => {
+    const address = user?.address || {};
+    if (!address.street || !address.pincode || !address.city || !address.state) {
+      setMessage("⚠️ Please complete your 📍Address before checkout.");
+      setTimeout(() => navigate("/edit-profile"), 2000);
+    } else {
+      setAddressChecked(true);
+    }
+  };
+
+  const handleCashCheckout = async () => {
     if (!paymentMethod) {
       setMessage("Please select a payment method first.");
       return;
     }
- 
-    // ✅ Address check
-    const address = user?.address || {};
-    if (!address.street || !address.pincode || !address.city || !address.state) {
-      setMessage("⚠️Please complete your 📍Address before checkout.");
-      setTimeout(() => navigate("/edit-profile"), 3000); // Redirect after 2s
-      return;
-    }
-
     try {
       const res = await fetch("https://electronic-dukaan.onrender.com/checkout", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ paymentMethod }),
+        body: JSON.stringify({ paymentMethod: "Cash" }),
       });
-
-        
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Checkout failed");
-      setMessage(data.message || "Order placed successfully!");
+      setMessage("✅ Order placed with Cash on Delivery!");
       setCart([]);
-      setPaymentMethod(""); // Reset payment
+    } catch (err) {
+      console.error("Checkout error:", err);
+      setMessage(err.message);
+    }
+  };
+
+  const handleOnlineCheckout = async () => {
+    try {
+      const res = await fetch("https://electronic-dukaan.onrender.com/checkout", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ paymentMethod: "Online" }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Checkout failed");
+      setMessage("✅ Order placed with Online Payment!");
+      setCart([]);
     } catch (err) {
       console.error("Checkout error:", err);
       setMessage(err.message);
@@ -103,7 +113,9 @@ export default function Cart() {
   if (loading) return <p>Loading cart...</p>;
 
   const totalPrice = cart.reduce(
-    (sum, item) => sum + (item.product?.price || item.price || 0) * (item.quantity || 1),
+    (sum, item) =>
+      sum +
+      (item.product?.price || item.price || 0) * (item.quantity || 1),
     0
   );
 
@@ -141,7 +153,9 @@ export default function Cart() {
                     <div className="qty-controls">
                       <button
                         className="qty-btn"
-                        onClick={() => decreaseQuantity(item.product?._id || item._id)}
+                        onClick={() =>
+                          decreaseQuantity(item.product?._id || item._id)
+                        }
                         disabled={(item.quantity || 1) <= 1}
                       >
                         -
@@ -149,7 +163,9 @@ export default function Cart() {
                       <span className="qty-count">{item.quantity || 1}</span>
                       <button
                         className="qty-btn"
-                        onClick={() => increaseQuantity(item.product?._id || item._id)}
+                        onClick={() =>
+                          increaseQuantity(item.product?._id || item._id)
+                        }
                       >
                         +
                       </button>
@@ -178,48 +194,95 @@ export default function Cart() {
           <div className="checkout-section">
             <h3>Total Price: ₹{totalPrice.toFixed(2)}</h3>
 
-            {/* Payment Options */}
-            {!paymentMethod && (
+            {/* ✅ Step 1: Show Check Address Button */}
+            {!addressChecked && (
+              <button className="checkout-btn" onClick={handleCheckAddress}>
+                Check Address
+              </button>
+            )}
+
+            {/* ✅ Step 2: If address checked, then show payment method buttons */}
+            {addressChecked && !paymentMethod && (
               <div className="payment-options">
                 <h4>Select Payment Method:</h4>
-                <label>
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="Cash"
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                  />
-               <i className="fas fa-money-bill-wave"></i> Cash on Delivery
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="Online"
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                  />
-                 <i className="fas fa-credit-card"></i> Online Payment
-                </label>
+                <div className="payment-buttons">
+                  <button
+                    className="checkout-btn"
+                    onClick={() => setPaymentMethod("Cash")}
+                  >
+                    💵 Cash on Delivery
+                  </button>
+                  <button
+                    className="checkout-btn"
+                    onClick={() => setPaymentMethod("Online")}
+                  >
+                    💳 Online Payment (PayPal)
+                  </button>
+                </div>
               </div>
             )}
 
-            {/* Checkout button */}
-            {paymentMethod && (
-              <button className="checkout-btn" onClick={handleCheckout}>
-                Checkout with {paymentMethod}
+            {/* Cash Checkout */}
+            {paymentMethod === "Cash" && (
+              <button className="checkout-btn" onClick={handleCashCheckout}>
+                Checkout with Cash
+              </button>
+            )}
+
+            {/* PayPal Buttons */}
+            {paymentMethod === "Online" && !paid && (
+              <PayPalScriptProvider
+                options={{
+                  "client-id":
+                    "AafAegu05e4ImWlAPI_ItcBSZVNOvZke4UWXzFfTcMfQvszFpbfb8s4TwvkPTPgeEEkQBGUpSYQm3ii5",
+                  currency: "USD", // ⚠️ Sandbox works with USD
+                }}
+              >
+                <PayPalButtons
+                  style={{
+                    layout: "vertical",
+                    color: "blue",
+                    shape: "pill",
+                    label: "paypal",
+                  }}
+                  createOrder={(data, actions) => {
+                    const priceINR = totalPrice;
+                    const priceUSD = (priceINR / 83).toFixed(2); // 💱 convert INR → USD for sandbox
+                    return actions.order.create({
+                      purchase_units: [
+                        {
+                          description: "Your Product Order",
+                          amount: {
+                            currency_code: "USD",
+                            value: priceUSD,
+                          },
+                        },
+                      ],
+                    });
+                  }}
+                  onApprove={async (data, actions) => {
+                    const details = await actions.order.capture();
+                    alert("✅ Transaction completed by " + details.payer.name.given_name);
+                    setPaid(true);
+                  }}
+                  onError={(err) => {
+                    console.error("❌ PayPal Checkout onError", err);
+                    alert("Payment failed, please try again.");
+                  }}
+                />
+              </PayPalScriptProvider>
+            )}
+
+            {/* Final Checkout Button */}
+            {paymentMethod === "Online" && paid && (
+              <button className="checkout-btn" onClick={handleOnlineCheckout}>
+                Confirm Order (Online Paid)
               </button>
             )}
           </div>
         </>
       )}
-
- 
-      {message && (
-  <p style={{ color: "green", marginTop: "10px", fontWeight: "bold" }}>
-    {message}
-  </p>
-)}
-
+      {message && <p className="checkout-message">{message}</p>}
     </div>
   );
 }
