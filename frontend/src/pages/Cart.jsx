@@ -110,7 +110,7 @@ export default function Cart() {
     }
   };
 
-  if (loading) return <p>Loading cart...</p>;
+ 
    if (loading) return <Loading text="Loading cart..." />;
 
   const totalPrice = cart.reduce(
