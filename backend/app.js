@@ -677,7 +677,31 @@ app.get("/admin/me", adminAuthMiddleware, async (req, res) => {
   } 
 });
 
- 
+
+// backend route (example)
+app.get("/admin/users",adminAuthMiddleware, async (req, res) => {
+  const users = await User.find(); // fetch all users from DB
+  res.json(users);
+});
+// DELETE user (admin only)
+app.delete("/admin/users/:userId", adminAuthMiddleware, async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // optional: prevent deleting other admins
+    const userToDelete = await User.findById(userId);
+    if (!userToDelete) return res.status(404).json({ error: "User not found" });
+    if (userToDelete.isAdmin) return res.status(403).json({ error: "Cannot delete admin" });
+
+    await User.findByIdAndDelete(userId);
+    res.json({ message: "User deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting user:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
