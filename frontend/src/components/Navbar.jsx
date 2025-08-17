@@ -130,6 +130,9 @@ export default function Navbar() {
                   <button onClick={() => navigate("/AddProduct")}>
                     <i className="fas fa-plus-circle"></i> Add Products
                   </button>
+                    <button onClick={() => navigate("/admin/ManageUser")}>
+                     <i className="fas fa-users-cog"></i>  Manage Users
+                  </button>
                    <button onClick={() => navigate("/admin/register")}>
                     <i className="fas fa-plus-circle"></i> Add Admin
                   </button>
@@ -217,8 +220,15 @@ export default function Navbar() {
             <Link to="/ProductList" onClick={() => setMobileMenu(false)}>
               <i className="fas fa-shopping-cart"></i> Manage Products
             </Link>
+            
             <Link to="/AddProduct" onClick={() => setMobileMenu(false)}>
               <i className="fas fa-plus-circle"></i> Add Products
+            </Link>
+            <Link to="/admin/ManageUser" onClick={() => setMobileMenu(false)}>
+              <i className="fas fa-users-cog"></i>  Manage Users
+            </Link>
+              <Link to="/admin/register" onClick={() => setMobileMenu(false)}>
+              <i className="fas fa-plus-circle"></i> Add Admin  
             </Link>
             <button onClick={logoutAdmin}>
               <i className="fa-solid fa-right-from-bracket"></i> Admin Logout

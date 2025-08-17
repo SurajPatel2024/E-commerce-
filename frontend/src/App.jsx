@@ -16,6 +16,7 @@ import AdminOrders from "./admin/AdminOrders";
 import AdminLogin from "./admin/AdminLogin";
 import AdminRegister from "./admin/AdminRegister";
 import AdminDashboard from "./admin/AdminDashboard";
+import Alluser from "./admin/Alluser";
  
  
  
@@ -41,6 +42,8 @@ export default function App() {
           <Route path="/admin/login" element={<AdminLogin/>}/>
           <Route path="/admin/register" element={<AdminRegister/>}/>
           <Route path="/admin/dashboard" element={<AdminDashboard/>} />
+     
+          <Route path="/admin/ManageUser" element={<Alluser/>} />
      
              
             <Route path="*" element={<Home />} />
