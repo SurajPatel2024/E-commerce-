@@ -130,6 +130,9 @@ export default function Navbar() {
                   <button onClick={() => navigate("/AddProduct")}>
                     <i className="fas fa-plus-circle"></i> Add Products
                   </button>
+                   <button onClick={() => navigate("/admin/register")}>
+                    <i className="fas fa-plus-circle"></i> Add Admin
+                  </button>
                   <button onClick={logoutAdmin}>
                     <i className="fa-solid fa-right-from-bracket"></i> Admin Logout
                   </button>

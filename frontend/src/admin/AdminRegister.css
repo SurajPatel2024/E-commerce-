@@ -1,4 +1,4 @@
-/* AdminRegister.css */
+/* AdminRegister.css - Orange Theme */
 
 .auth-container {
   max-width: 400px;
@@ -6,16 +6,22 @@
   padding: 30px 25px;
   background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.auth-container:hover {
+  transform: translateY(-3px);
 }
 
 .auth-container h2 {
   margin-bottom: 25px;
-  color: #007bff;
+  color: #ff7a00; /* Orange */
   font-size: 28px;
   font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .auth-form {
@@ -28,39 +34,41 @@
   padding: 12px 15px;
   font-size: 16px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .auth-form input:focus {
-  border-color: #007bff;
+  border-color: #ff7a00;
+  box-shadow: 0 0 5px rgba(255, 122, 0, 0.4);
 }
 
 .auth-form button {
   padding: 12px 0;
-  background-color: #007bff;
+  background: linear-gradient(135deg, #ff7a00, #ff8800);
   color: white;
   font-size: 16px;
   font-weight: 600;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .auth-form button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #e66900, #ff7a00);
+  transform: scale(1.03);
 }
 
 .error-msg {
-  color: #f44336;
+  color: #e53935;
   font-weight: 600;
   margin-top: 10px;
 }
 
 .success-msg {
-  color: #4caf50;
+  color: #43a047;
   font-weight: 600;
   margin-top: 10px;
 }
